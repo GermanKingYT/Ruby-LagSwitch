@@ -9,12 +9,12 @@ puts ""
 puts "-- LAG SWITCH --".center(39, " ")
 
 def enable()
-    system('netsh advfirewall firewall add rule name="TSI" dir=in action=block program="' + $config["application"] + '" > nul 2>&1') if $config["mode"] == "in" or $config["mode"] == "both"
-    system('netsh advfirewall firewall add rule name="TSI" dir=out action=block program="' + $config["application"] + '" > nul 2>&1') if $config["mode"] == "out" or $config["mode"] == "both"
+    system('netsh advfirewall firewall add rule name="LagSwitch" dir=in action=block program="' + $config["application"] + '" > nul 2>&1') if $config["mode"] == "in" or $config["mode"] == "both"
+    system('netsh advfirewall firewall add rule name="LagSwitch" dir=out action=block program="' + $config["application"] + '" > nul 2>&1') if $config["mode"] == "out" or $config["mode"] == "both"
 end
 
 def disable()
-    system('netsh advfirewall firewall delete rule name="TSI" > nul 2>&1')
+    system('netsh advfirewall firewall delete rule name="LagSwitch" > nul 2>&1')
 end
 
 if !File.exist? "config.json"
